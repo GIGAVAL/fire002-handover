@@ -149,6 +149,23 @@
   .prompt pre{margin:0; font-family:var(--mono); font-size:11.5px; line-height:1.6; white-space:pre-wrap; color:var(--ink-2);}
   .prompt .pl{font-size:10px; letter-spacing:.14em; text-transform:uppercase; font-weight:700; color:var(--accent); font-family:var(--mono); display:block; margin-bottom:6px;}
   .prompt button{position:absolute; top:8px; right:8px; padding:3px 8px; font-size:10px;}
+  .mantra{border:2px solid var(--ink); background:var(--panel); padding:18px 22px; margin:22px 0 0; text-align:center;}
+  .mantra .m1{font-family:var(--mono); font-size:clamp(15px,2.6vw,21px); font-weight:700; letter-spacing:.08em;}
+  .mantra .m1 em{font-style:normal; color:var(--accent);}
+  .mantra .m2{font-size:12.5px; color:var(--ink-2); margin-top:6px; max-width:74ch; margin-left:auto; margin-right:auto;}
+  .pipe{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); border:1.5px solid var(--ink); border-top:none; background:var(--panel);}
+  .pipe-step{padding:12px 14px 14px; border-right:1px solid var(--rule); position:relative;}
+  .pipe-step:last-child{border-right:none;}
+  .pipe-step .pn{font-family:var(--mono); font-size:13px; font-weight:700; color:var(--accent); letter-spacing:.1em;}
+  .pipe-step .pd{font-size:12px; color:var(--ink-2); margin-top:4px;}
+  .pipe-step .px{font-size:11.5px; margin-top:8px; padding-top:8px; border-top:1px dashed var(--rule);}
+  .pipe-step .px b{font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--ink-3); display:block; margin-bottom:2px; font-weight:600;}
+  .rules{list-style:none; margin:14px 0 0; padding:0; display:grid; gap:10px;}
+  .rules li{border:1.5px solid var(--ink); background:var(--panel); padding:11px 16px 13px; display:grid; grid-template-columns:34px minmax(0,1fr); gap:2px 14px;}
+  .rules .rn{font-family:var(--mono); font-weight:700; font-size:17px; color:var(--accent); grid-row:span 2;}
+  .rules .rt{font-weight:600; font-size:14px;}
+  .rules .rx{font-size:12.5px; color:var(--ink-2);}
+  .rules .rx .tag{font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--accent); font-weight:700;}
   .shot img{width:100%; height:auto; display:block; border:1px solid var(--rule); background:#fff;}
   .gallery{display:grid; gap:20px; margin:14px 0;}
   .callout{border:1.5px solid var(--accent); background:var(--accent-soft); padding:12px 16px; margin:16px 0; max-width:78ch;}
@@ -205,6 +222,53 @@
     </div>
     <p style="font-size:12.5px; color:var(--ink-2); margin:10px 0 0;">Overall check = worst sub-check (FAIL &gt; REVIEW &gt; PASS). Uncertainty always resolves to REVIEW, never PASS — a wrong FAIL costs an architect ten minutes; a wrong PASS lets a non-compliant fire design into a building people sleep in.</p>
   </div>
+
+  <!-- ============ METHOD CHEAT SHEET ============ -->
+  <section id="method">
+    <span class="eyebrow">Method</span>
+    <h2>The cheat sheet this document runs on</h2>
+    <p class="lede">The framework is check-agnostic; FIRE-002 is one instantiation of it. Everything below the mantra is the same five-step pipeline and six rules, filled in with this client's parameters.</p>
+
+    <div class="mantra">
+      <div class="m1">CODE IS UNIVERSAL — <em>THE CLIENT IS A PARAMETER</em></div>
+      <div class="m2">Table C3D3's limits don't care who drew the set. What varies per client is everything else: the sheet numbering (AR-21xx here, not "A2100"), the legend palette, the compartment ID scheme, the jurisdiction, the stage, the Type of construction. Hard-code the code; parameterise the client.</div>
+    </div>
+    <div class="pipe">
+      <div class="pipe-step"><span class="pn">1 · WHICH?</span>
+        <div class="pd">Which elements does the rule govern</div>
+        <div class="px"><b>FIRE-002</b>Fire compartments, Class 5–9 only — SOU walls and Class 2 portions are explicitly out</div></div>
+      <div class="pipe-step"><span class="pn">2 · WHERE?</span>
+        <div class="pd">Where each fact lives on the sheets</div>
+        <div class="px"><b>FIRE-002</b>Levels: GA series · boundaries/IDs: AR-2101–06 · heights: AR-2131 RLs · Type &amp; sprinklers: outside the set</div></div>
+      <div class="pipe-step"><span class="pn">3 · TEST?</span>
+        <div class="pd">The pass/fail sentence with a number</div>
+        <div class="px"><b>FIRE-002</b>"Compartment area ≤ 8 000 m² AND volume ≤ 48 000 m³ (Class 5, Type A), measured within 2% of annotated"</div></div>
+      <div class="pipe-step"><span class="pn">4 · MISSING?</span>
+        <div class="pd">Missing info = CAN'T-VERIFY, never guess</div>
+        <div class="px"><b>FIRE-002</b>No Type stated → REVIEW the size check. No sprinkler evidence → REVIEW the carpark exemption</div></div>
+      <div class="pipe-step"><span class="pn">5 · REPORT</span>
+        <div class="pd">Every result cited: sheet + code + fix</div>
+        <div class="px"><b>FIRE-002</b>"002.4 FAIL · AR-2102 · DBP s.9 auditability · fix: annotate G.1/G.2 areas or add schedule"</div></div>
+    </div>
+    <p style="font-size:12.5px; color:var(--ink-2); margin:10px 0 0; max-width:78ch;">A clean PASS with evidence is a deliverable — <strong>certainty is the product.</strong> The tool never sells a verdict it can't cite.</p>
+
+    <h3>The 6 rules, instantiated on this set</h3>
+    <ol class="rules">
+      <li><span class="rn">1</span><span class="rt">Every step ends PASS / FAIL / CANNOT-VERIFY. Missing info never silently passes. Never guess.</span>
+        <span class="rx"><span class="tag">HERE →</span> CANNOT-VERIFY is rendered REVIEW in the output contract. The carpark's C3D2 exemption is <em>probably</em> valid — sprinklers are referenced all over the FER notes — but the evidence sheet isn't in the architectural set, so 002.3 says REVIEW, not PASS.</span></li>
+      <li><span class="rn">2</span><span class="rt">Plan vs. schedule vs. detail disagree → that's a FINDING (coordination error), not a coin flip. Say which source governs.</span>
+        <span class="rx"><span class="tag">HERE →</span> Section AR-2131 labels the basement compartment B1; plan AR-2101 carries no ID at all — reported as a plan/section mismatch, with the plan governing IDs and the section governing heights. Same rule handles register-vs-title-block disagreements (title block wins) and duplicate revisions (latest wins, duplicate reported).</span></li>
+      <li><span class="rn">3</span><span class="rt">Numbers get units and tolerances.</span>
+        <span class="rx"><span class="tag">HERE →</span> Areas in m², volumes in m³, heights in mm (3375 / 3200 / 3750 from RL subtraction). Measured-vs-annotated disagreement band: 2% → REVIEW. Annotated within 5% of a limit: PASS + near-limit warning. Raster scans double both bands.</span></li>
+      <li><span class="rn">4</span><span class="rt">Gate scope first — what's OUT of the check matters as much as what's in.</span>
+        <span class="rx"><span class="tag">HERE →</span> Out: SOU separation walls (real fire engineering, wrong rule), Class 2 sizing (no C3D3 entry → N/A branch), FER contents (tool can't evaluate — REVIEW), sprinkler design (other discipline). Step 0 gates the biggest scope of all: the jurisdiction.</span></li>
+      <li><span class="rn">5</span><span class="rt">Think cumulative / system-level.</span>
+        <span class="rx"><span class="tag">HERE →</span> Compartment 2.4 spans Levels 02–03 and the carpark spans B1→L2 — so volume accumulates across storeys and a per-sheet check would pass walls while missing the system. The stair shaft (120/120/120, B1→L4) only exists as a system, which is why the series includes a section and the tool must read it.</span></li>
+      <li><span class="rn">6</span><span class="rt">Name what the recommended fix breaks.</span>
+        <span class="rx"><span class="tag">HERE →</span> The fix for the 002.4 FAIL is "annotate every compartment area" — which immediately arms 002.3: declared numbers can expose an over-limit compartment that silence was hiding. If subdividing follows, new fire walls put doors on egress paths (travel-distance and width checks re-open) and every new penetration needs an AR-2151/52 detail. The fix is still right; the report says what it re-opens.</span></li>
+    </ol>
+    <div class="cbox"><label for="c-method">Your judgment — method<span class="saved">saved ✓</span></label><textarea id="c-method" data-key="method" placeholder="Tune the wording of the mantra or rules for Ron's review; note which rule this client's set stress-tests hardest…"></textarea></div>
+  </section>
 
   <!-- ============ PART A: PRE-FLIGHT QUESTIONS ============ -->
   <section id="preflight">
