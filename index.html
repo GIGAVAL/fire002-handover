@@ -397,7 +397,7 @@ No legend or no labels at all = FAIL; partial/unclosed/low-confidence = REVIEW.<
     <div class="qcard">
       <div class="qcard-head"><span class="qnum">002.3</span><h3>Sizes comply with NCC Table C2.2 (= C3D3)</h3><span style="margin-left:auto; display:flex; gap:6px;"><span class="chip na">N/A</span><span class="chip review">REVIEW</span></span></div>
       <div class="qbody">
-        <p style="margin:0 0 10px;"><em>&ldquo;Maximum compartment sizes comply with NCC Table C2.2.&rdquo;</em> — each compartment&rsquo;s area <strong>and</strong> volume against Table C3D3 (2022 numbering of the cited C2.2 — Part D below), honouring its exemptions. Row = class, column = Type of construction, and both limits must hold.</p>
+        <p style="margin:0 0 10px;"><em>&ldquo;Maximum compartment sizes comply with NCC Table C2.2.&rdquo;</em> — each compartment&rsquo;s area <strong>and</strong> volume against Table C3D3 (2022 numbering of the cited C2.2 — Part E below), honouring its exemptions. Row = class, column = Type of construction, and both limits must hold.</p>
         <div class="basis" style="margin:0 0 4px;">
           <span class="bk">Drawings</span><div class="evidence" style="margin:0;"><span class="chip ref">AR-2101–2106 · pp.5–10 (geometry @ 1:100)</span><span class="chip ref">AR-2131 · p.11 (RLs → storey heights)</span><span class="chip ext">BCA report (Type)</span><span class="chip ext">Fire services dwgs (Spec 17 sprinklers)</span><span class="chip ext">FER (performance solutions)</span></div>
           <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">NCC 2022 Table C3D3</span><span class="chip code">C3D2(1)</span><span class="chip code">C3D4</span><span class="chip code">C3D6 (NSW-varied)</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">Scope is Class 5–9 only — Class 2/3 portions are N/A by C3D3(1); each exemption clause reroutes the verdict rather than relaxing it silently. A DTS breach covered by an FER is REVIEW, never FAIL — the tool can&rsquo;t evaluate an FER.</p></div>
@@ -632,9 +632,73 @@ nine sheets → 002.4 FAIL, driving the overall Critical verdict.</pre></div></d
     </figure>
   </section>
 
-  <!-- ============ PART D: RULE TABLE ============ -->
-  <section id="rules">
+  <!-- ============ PART D: COLOUR AS DATA ============ -->
+  <section id="colour">
     <span class="eyebrow">Part D</span>
+    <h2>Colour as data — the wall-type validation layer</h2>
+    <p class="lede">A pattern this set exposes: it defines life-safety ratings almost entirely through <strong>colour mapped by legends</strong> — six FRL line colours, class hatches, door tags. That is atypical; most construction sets carry ratings as black-and-white wall-type tags. It makes this set unusually machine-readable, and it creates a validation duty most checks miss: <strong>a colour on a fire plan is a claim of rating, not proof of one.</strong> The proof is the wall&rsquo;s composition — and that lives on different sheets.</p>
+
+    <h3>The colour census — measured from the vector PDF, not eyeballed</h3>
+    <div class="twrap">
+      <table>
+        <caption>Vector colour census — AR-2102 (Ground), strokes + fills extracted from the PDF drawing stream</caption>
+        <thead><tr><th>Colour found</th><th class="mono">Hex</th><th>Legend meaning</th><th class="mono num">Paths</th><th>Reading</th></tr></thead>
+        <tbody>
+          <tr><td><span class="swatch" style="background:#FF0000; display:inline-block; vertical-align:middle;"></span></td><td class="mono">#FF0000</td><td>FRL 90/90/90 boundary</td><td class="mono num">434</td><td>The dominant signal colour — the rated shell of G.1/G.2</td></tr>
+          <tr><td><span class="swatch" style="background:#007F3F; display:inline-block; vertical-align:middle;"></span></td><td class="mono">#007F3F</td><td>FRL 120/120/120 boundary</td><td class="mono num">33</td><td>Carpark-to-lobby and shaft separations</td></tr>
+          <tr><td><span class="swatch" style="background:#FF7F00; display:inline-block; vertical-align:middle;"></span></td><td class="mono">#FF7F00</td><td>FRL −/90/90 boundary</td><td class="mono num">20</td><td>Non-loadbearing rated walls near the site boundary</td></tr>
+          <tr><td><span class="swatch" style="background:#7F7FBF; display:inline-block; vertical-align:middle;"></span></td><td class="mono">#7F7FBF</td><td>−/60/60 / fire compartment dash</td><td class="mono num">54</td><td>Compartment boundary linetype</td></tr>
+          <tr><td><span class="swatch" style="background:#E8E8F4; display:inline-block; vertical-align:middle;"></span></td><td class="mono">#E8E8F4</td><td>Class 2 hatch</td><td class="mono num">30</td><td>Residential zones</td></tr>
+          <tr><td><span class="swatch" style="background:#F2F4ED; display:inline-block; vertical-align:middle;"></span></td><td class="mono">#F2F4ED</td><td>Class 7A hatch</td><td class="mono num">36</td><td>Carpark zone</td></tr>
+          <tr><td><span class="swatch" style="background:linear-gradient(90deg,#020202,#AAAAAA,#D3D3D3); display:inline-block; vertical-align:middle;"></span></td><td class="mono">greys</td><td>— (not in legend)</td><td class="mono num">≈22,000</td><td>Base architectural linework — noise, not signal</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <div class="lg-title">Legend — What the census proves</div>
+      <div class="lg-grid" style="grid-template-columns:1fr;">
+        <div class="lg-row"><strong style="flex:none; width:150px;">Signal vs noise</strong> ~0.5% of paths carry saturated legend colours; everything else is grey linework — so colour segmentation is a high-precision extractor on this set</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Round-trip</strong> Every saturated colour found on the sheet maps to a legend entry, and every legend colour appears on the sheet — the two-way completeness check the tool runs per sheet</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Fragility</strong> Colour dies in greyscale prints and drifts between plot profiles — which is why every colour claim must also have a text anchor (FRL note, door tag) and why palettes are read per sheet, never hard-coded</div>
+      </div>
+    </div>
+
+    <h3>From claimed colour to proven wall — the cross-check chain</h3>
+    <p>On the partition plans the same wall is not a colour: it is a <strong>wall-type tag</strong>, and the tag resolves to a construction with a tested rating. Both exist in this set — verified:</p>
+    <div class="basis" style="margin:0 0 14px;">
+      <span class="bk">Step 1 · Claim</span><div><span class="chip ref">AR-2101–2106 (fire plans)</span><p style="margin:6px 0 0; font-size:12.5px; color:var(--ink-2);">Boundary segment colour → legend → <em>claimed FRL</em> (e.g. the red 90/90/90 shell around G.1).</p></div>
+      <span class="bk">Step 2 · Locate</span><div><span class="chip ref">AR-1201–1206 (partition plans)</span><p style="margin:6px 0 0; font-size:12.5px; color:var(--ink-2);">Geometrically join the same wall segment on the partition plan for that level → read its <em>wall-type tag</em>.</p></div>
+      <span class="bk">Step 3 · Resolve</span><div><span class="chip ref">AR-0020 / AR-0021 (wall types)</span><p style="margin:6px 0 0; font-size:12.5px; color:var(--ink-2);">Tag → schedule row → composition and <em>tested FRL</em>. Real rows from AR-0020: <strong>C-series</strong> in-situ concrete 150–250&nbsp;mm → FRL 120/120/120–180/180/180; <strong>B-series</strong> blockwork 90–190&nbsp;mm → 120–180 (corefilled where required); <strong>H-series</strong> Hebel PowerPanel 75&nbsp;mm lobby walls → −/90/90 + Rw 50 acoustic. (Draw-order text extraction — the tool must verify tag↔FRL pairing from cell geometry, not text order.)</p></div>
+      <span class="bk">Step 4 · Test</span><div><span class="chip code">AS 1530.4</span><span class="chip code">NCC Spec 5</span><p style="margin:6px 0 0; font-size:12.5px; color:var(--ink-2);"><strong>claimed FRL ≤ tested FRL of the wall type, for every segment of the boundary.</strong> A compartment is only as strong as its weakest wall segment. Mismatch = coordination FINDING per cheat-sheet rule 2 — name which source governs (the schedule is the buildable truth; the fire plan is the intent).</p></div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head"><span class="qnum">002.5</span><h3>Proposed extension — boundary wall types resolve their claimed FRL</h3><span style="margin-left:auto; display:flex; gap:6px;"><span class="chip review">NEW CHECK</span></span></div>
+      <div class="qbody">
+        <p style="margin:0 0 10px; font-size:13px; color:var(--ink-2);">Not part of FIRE-002 as issued — this is the next level the colour pattern makes possible. Verdicts: PASS (every boundary segment&rsquo;s wall type meets or exceeds its claimed FRL) · FAIL (a segment&rsquo;s wall type is rated below the claim) · REVIEW (segment has no resolvable tag, tag missing from schedule, or fire/partition geometry won&rsquo;t join).</p>
+        <details class="prompt-d"><summary>Validation prompt — 002.5 (colour → wall type → tested FRL)</summary><div class="prompt"><span class="pl">Validation prompt — 002.5</span><button type="button" data-copy>Copy</button><pre>For each rated boundary segment on the fire plans (AR-2101–2106): read its
+claimed FRL from the sheet legend colour (census: #FF0000=90/90/90,
+#007F3F=120/120/120, #FF7F00=-/90/90 — re-read swatches per sheet, never
+hard-code). Overlay the same level's partition plan (AR-1201–1206) and join
+segments by geometry (tolerance ~2x wall thickness at 1:100). Read the wall-type
+tag; resolve it in the wall-type schedule (AR-0020/0021) to composition +
+tested FRL, taking the pairing from table-cell geometry, not text draw order.
+Assert claimed <= tested per segment (structural adequacy/integrity/insulation
+compared field-by-field; "-" claimed = no requirement). Also run the three
+colour-integrity checks per sheet: (a) every saturated colour used appears in
+the legend and vice versa; (b) every colour claim has a text anchor that
+survives greyscale; (c) no two legend colours within a perceptual distance
+that collides under scan/print (flag red 90/90/90 vs dark-red 60/60/60).
+Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
+("COREFILLED IF REQUIRED") with no corefill note -> REVIEW, never PASS.</pre></div></details>
+        <div class="cbox slim"><label for="c-colour">Your judgment — colour &amp; wall-type layer<span class="saved">saved ✓</span></label><textarea id="c-colour" data-key="colour" placeholder="e.g. is colour-first drafting an SJB house style or an emerging norm? Should Structure AI treat legend parsing as a first-class platform capability?"></textarea></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PART E: RULE TABLE ============ -->
+  <section id="rules">
+    <span class="eyebrow">Part E</span>
     <h2>The rule table 002.3 enforces</h2>
     <p class="lede">NCC 2022 Table C3D3 (the check's cited "Table C2.2", 2019 numbering — same limits). Every cell is <strong>two</strong> limits; a compartment must satisfy both.</p>
 
@@ -676,9 +740,9 @@ nine sheets → 002.4 FAIL, driving the overall Critical verdict.</pre></div></d
     <div class="cbox"><label for="c-rules">Your judgment — rule table &amp; exemptions<span class="saved">saved ✓</span></label><textarea id="c-rules" data-key="rules" placeholder="e.g. how you'd handle mixed-class pro-rata in practice; whether the 2% annotation-vs-measured band is right for this client…"></textarea></div>
   </section>
 
-  <!-- ============ PART E: TRAPS ============ -->
+  <!-- ============ PART F: TRAPS ============ -->
   <section id="traps">
-    <span class="eyebrow">Part E</span>
+    <span class="eyebrow">Part F</span>
     <h2>Where the engineer gets stuck (ranked)</h2>
     <div class="twrap">
       <table>
@@ -695,15 +759,16 @@ nine sheets → 002.4 FAIL, driving the overall Critical verdict.</pre></div></d
           <tr><td class="mono">8</td><td>Trusting annotations without re-measuring, or vice versa</td><td>2% disagreement band → REVIEW; near-limit PASS gets a warning</td></tr>
           <tr><td class="mono">9</td><td>Processing superseded revisions (register here has T, V, X, Z copies)</td><td>Dedupe by sheet number, keep max revision, report duplicates</td></tr>
           <tr><td class="mono">10</td><td>Hard-coding legend colours — palettes differ per firm and plot</td><td>Read the swatches from each sheet's own legend</td></tr>
+          <tr><td class="mono">11</td><td>Treating colour as proof — a coloured line is a <em>claimed</em> rating; greyscale prints and plot profiles destroy it silently</td><td>Cross-check every claim against the wall-type schedule (Part D chain); require a text anchor per colour</td></tr>
         </tbody>
       </table>
     </div>
     <div class="cbox"><label for="c-traps">Your judgment — traps<span class="saved">saved ✓</span></label><textarea id="c-traps" data-key="traps" placeholder="Add traps you'd rank differently, or ones from your own practice…"></textarea></div>
   </section>
 
-  <!-- ============ PART F: REVIEW & SIGN-OFF ============ -->
+  <!-- ============ PART G: REVIEW & SIGN-OFF ============ -->
   <section id="signoff">
-    <span class="eyebrow">Part F</span>
+    <span class="eyebrow">Part G</span>
     <h2>Review &amp; sign-off — Ron, founders, product</h2>
     <p class="lede">This document is the domain half of a Structure AI check; your judgment is the other half. Every yellow box in this page is a capture point — the boxes below are for the decisions that don't belong to any one section.</p>
 
@@ -742,7 +807,7 @@ nine sheets → 002.4 FAIL, driving the overall Critical verdict.</pre></div></d
 
   <footer>
     <span>FIRE-002 · Handover &amp; validation sheet · Valerie Jimenez · nyc@vjimenez.io</span>
-    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R2 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
+    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R3 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
   </footer>
 </div>
 
