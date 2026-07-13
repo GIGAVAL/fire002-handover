@@ -315,7 +315,7 @@
     <div class="qcard">
       <div class="qcard-head"><span class="qnum">Q3</span><h3>What does their set actually contain — and what conventions does it use?</h3></div>
       <div class="qbody">
-        <div class="verdict-line"><span class="chip pass">INVENTORIED</span><span style="font-size:13px; color:var(--ink-2);">9-sheet fire series; full inventory in Part C below</span></div>
+        <div class="verdict-line"><span class="chip pass">INVENTORIED</span><span style="font-size:13px; color:var(--ink-2);">9-sheet fire series; sheet-by-sheet evidence in Part C below</span></div>
         <p>The fire compartmentation series is <strong>nine sheets</strong>: six level plans (AR-2101 Basement 01 → AR-2106 Level 04), one overall section (AR-2131), and two passive-fire detail sheets (AR-2151/52). Note the check said <strong>"Sheet ref A2100" — no such sheet exists.</strong> The real series is AR-21xx; resolving by register title match (<span class="mono" style="font-family:var(--mono); font-size:12px;">FIRE\s*COMPART</span>), never by hard-coded number, is what makes the check portable across firms.</p>
         <p><strong>Their conventions:</strong> every plan sheet carries the same two-part legend — six FRL boundary colours plus smoke seals, drenched openings, a services fire box (FB) symbol, and three door-rating tags (FR1/FR2/FR3); and a building-class legend (Class 2 / Class 7A hatches + dashed FIRE COMPARTMENT linetype). Compartments are labelled <span class="mono" style="font-family:var(--mono); font-size:12px;">&lt;level&gt;.&lt;n&gt;</span> — G.1, G.2, 1.1–1.2, 2.1–2.4, 3.1–3.3, 4.1. FER references appear as leadered notes. <strong>What's absent: not one m² area annotation anywhere in the series</strong> — which is exactly what sub-check 4 exists to catch.</p>
         <div class="evidence">
@@ -635,7 +635,7 @@ nine sheets → 002.4 FAIL, driving the overall Critical verdict.</pre></div></d
   <!-- ============ PART D: RULE TABLE ============ -->
   <section id="rules">
     <span class="eyebrow">Part D</span>
-    <h2>The rule table sub-check 3 enforces</h2>
+    <h2>The rule table 002.3 enforces</h2>
     <p class="lede">NCC 2022 Table C3D3 (the check's cited "Table C2.2", 2019 numbering — same limits). Every cell is <strong>two</strong> limits; a compartment must satisfy both.</p>
 
     <div class="twrap">
@@ -701,9 +701,48 @@ nine sheets → 002.4 FAIL, driving the overall Critical verdict.</pre></div></d
     <div class="cbox"><label for="c-traps">Your judgment — traps<span class="saved">saved ✓</span></label><textarea id="c-traps" data-key="traps" placeholder="Add traps you'd rank differently, or ones from your own practice…"></textarea></div>
   </section>
 
+  <!-- ============ PART F: REVIEW & SIGN-OFF ============ -->
+  <section id="signoff">
+    <span class="eyebrow">Part F</span>
+    <h2>Review &amp; sign-off — Ron, founders, product</h2>
+    <p class="lede">This document is the domain half of a Structure AI check; your judgment is the other half. Every yellow box in this page is a capture point — the boxes below are for the decisions that don't belong to any one section.</p>
+
+    <div class="legend">
+      <div class="lg-title">Legend — How the review workflow works</div>
+      <div class="lg-grid" style="grid-template-columns:1fr;">
+        <div class="lg-row"><strong style="flex:none; width:150px;">Write</strong> Type directly into any yellow box — it saves to your browser automatically as you type (the counter in the toolbar tracks your total)</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Export</strong> <em>Export comments</em> in the toolbar downloads your notes as one JSON file — send it to Valerie</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Merge</strong> <em>Import</em> loads someone else's exported file into your view, so all judgments can be consolidated in one place</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Caution</strong> Notes do not sync between the claude.ai artifact and the GitHub Pages copy (separate browsers/origins count separately too) — do your review in one place, or use Export/Import to move notes across</div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head"><span class="qnum">R1</span><h3>Ron — domain review</h3></div>
+      <div class="qbody">
+        <p style="margin:0; color:var(--ink-2); font-size:13px;">Is the decomposition right? Are the verdict semantics (REVIEW-never-guess, FER routing, N/A branches) how you'd want every Structure AI check to behave — or is FIRE-002 a special case?</p>
+        <div class="cbox"><label for="c-ron">Reviewer notes — Ron<span class="saved">saved ✓</span></label><textarea id="c-ron" data-key="review.ron"></textarea></div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><span class="qnum">R2</span><h3>Founders — product review</h3></div>
+      <div class="qbody">
+        <p style="margin:0; color:var(--ink-2); font-size:13px;">What here generalises into the platform? Candidates on the table: the WHICH→WHERE→TEST→MISSING→REPORT pipeline as the check-authoring template; the enforce/advise mode flag from title-block status; the context object (jurisdiction, edition, Type, sprinklers) shared across all fire checks; the evidence-cited output contract.</p>
+        <div class="cbox"><label for="c-founders">Reviewer notes — Founders<span class="saved">saved ✓</span></label><textarea id="c-founders" data-key="review.founders"></textarea></div>
+      </div>
+    </div>
+    <div class="qcard">
+      <div class="qcard-head"><span class="qnum">R3</span><h3>Decisions — how this maps to Structure AI</h3></div>
+      <div class="qbody">
+        <p style="margin:0; color:var(--ink-2); font-size:13px;">Agreed actions out of this review: what ships, what changes, who owns each item, and which check gets the FIRE-002 treatment next.</p>
+        <div class="cbox"><label for="c-product">Decisions &amp; owners<span class="saved">saved ✓</span></label><textarea id="c-product" data-key="review.decisions"></textarea></div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <span>FIRE-002 · Handover &amp; validation sheet · Valerie Jimenez · nyc@vjimenez.io</span>
-    <span class="mono" style="font-family:var(--mono);">SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
+    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R2 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
   </footer>
 </div>
 
