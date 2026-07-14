@@ -49,7 +49,7 @@
   }
 
   html{background:var(--paper);}
-  body{font-family:var(--sans); color:var(--ink); line-height:1.55; margin:0; padding:32px 20px 80px;}
+  body{font-family:var(--sans); color:var(--ink); line-height:1.55; margin:0; padding:32px 20px 80px; background:var(--paper);}
   .sheet{max-width:1060px; margin:0 auto;}
 
   /* ---------- title block ---------- */
@@ -284,20 +284,31 @@
       <li><span class="rn">6</span><span class="rt">Name what the recommended fix breaks.</span>
         <span class="rx"><span class="tag">HERE →</span> The fix for the 002.4 FAIL is "annotate every compartment area" — which immediately arms 002.3: declared numbers can expose an over-limit compartment that silence was hiding. If subdividing follows, new fire walls put doors on egress paths (travel-distance and width checks re-open) and every new penetration needs an AR-2151/52 detail. The fix is still right; the report says what it re-opens.</span></li>
     </ol>
-    <h3>Proof the framework transfers — the same five steps on a different rule</h3>
-    <p class="lede">The responses change per task; the steps never do. Here is the pipeline re-instantiated on an unrelated check — swinging doors in a means of egress:</p>
-    <div class="pipe" style="border-top:1.5px solid var(--ink);">
-      <div class="pipe-step"><span class="pn">1 · WHICH?</span>
-        <div class="px"><b>EGRESS DOORS</b>Swinging doors on egress paths. OUT on purpose: sliders/revolving (their own code sections — note them, don't judge them), closets, doors not on an egress path. A check that fires on out-of-scope elements buries real findings in noise</div></div>
-      <div class="pipe-step"><span class="pn">2 · WHERE?</span>
-        <div class="px"><b>EGRESS DOORS</b>Every fact has a home sheet; name it. A fact with no home anywhere in the set is itself a set-level finding</div></div>
-      <div class="pipe-step"><span class="pn">3 · TEST?</span>
-        <div class="px"><b>EGRESS DOORS</b>One sentence with a number in it — and remember cumulative: widths and travel distances sum along the path</div></div>
-      <div class="pipe-step"><span class="pn">4 · MISSING?</span>
-        <div class="px"><b>EGRESS DOORS</b>Never guess — flag it. A tool that guesses is worse than no tool</div></div>
-      <div class="pipe-step"><span class="pn">5 · REPORT</span>
-        <div class="px"><b>EGRESS DOORS</b>Evidence or it didn't happen. The PASS with citations IS the product</div></div>
-    </div>
+    <h3>The check contract — the framework as code</h3>
+    <p class="lede">A check is data: the five steps are the schema, the client fills the parameters. Two instantiations, nothing changes but the values.</p>
+    <div class="prompt"><span class="pl">check-contract.jsonc</span><button type="button" data-copy>Copy</button><pre>// Step -1 sets the consequence, never hard-coded
+// mode: "enforce" (red pen - FAIL blocks the issue) | "advise" (pencil - punch-list note)
+
+{ "check": "FIRE-002.3",
+  "mode":  "from title-block status",
+  "which": "fire compartments, Class 5-9 only",
+  "out":   ["SOU walls (wrong rule)", "Class 2/3 sizing -> N/A per C3D3(1)",
+            "FER contents -> REVIEW", "sprinkler design (other discipline)"],
+  "where": { "boundaries": "AR-2101-2106", "heights": "AR-2131 RL subtraction",
+             "type": "BCA report (EXTERNAL -> REVIEW if absent)" },
+  "test":  "area_m2 <= C3D3[class][type].area AND vol_m3 <= C3D3[class][type].vol",
+  "missing": "REVIEW",                      // never guess
+  "report": { "verdict": "…", "sheet": "…", "clause": "…", "fix": "…" } }
+
+// same schema, unrelated rule — the transfer is free:
+{ "check": "EGRESS-DOOR-SWING",
+  "which": "swinging doors on egress paths",
+  "out":   ["sliders/revolving (own sections - note, don't judge)",
+            "closets", "doors off the egress path"],
+  "where": "every fact has a home sheet; no home anywhere = set-level finding",
+  "test":  "clear_width_mm >= limit AND sum(travel_mm along path) <= limit",  // cumulative
+  "missing": "REVIEW",                      // a tool that guesses is worse than no tool
+  "report": "the PASS with citations IS the product" }</pre></div>
     <p style="font-size:12.5px; color:var(--ink-2); margin:10px 0 0; max-width:78ch;"><strong>If you're truly stuck:</strong> scope which elements the rule governs first. Then walk the five steps.</p>
 
     <div class="cbox"><label for="c-method">Your judgment — method<span class="saved">saved ✓</span></label><textarea id="c-method" data-key="method" placeholder="Tune the wording of the mantra or rules for Ron's review; note which rule this client's set stress-tests hardest…"></textarea></div>
@@ -834,7 +845,7 @@ Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
 
   <footer>
     <span>FIRE-002 · Handover &amp; validation sheet · Valerie Jimenez · nyc@vjimenez.io</span>
-    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R4 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
+    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R5 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
   </footer>
 </div>
 
