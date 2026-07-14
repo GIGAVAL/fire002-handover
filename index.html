@@ -534,7 +534,7 @@ No legend or no labels at all = FAIL; partial/unclosed/low-confidence = REVIEW.<
         <p style="margin:0 0 10px;"><em>&ldquo;Maximum compartment sizes comply with NCC Table C2.2.&rdquo;</em><span style="font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--accent); font-weight:700;"> DEFINE: MAXIMUM · SIZES · COMPLIANCE AUTHORITY · NCC C2.2.</span> — each compartment&rsquo;s area <strong>and</strong> volume against Table C3D3 (2022 numbering of the cited C2.2 — Part 4 below), honouring its exemptions. Row = class, column = Type of construction, and both limits must hold.</p>
         <div class="basis" style="margin:0 0 4px;">
           <span class="bk">Drawings</span><div class="evidence" style="margin:0;"><span class="chip ref">AR-2101–2106 · pp.5–10 (geometry @ 1:100)</span><span class="chip ref">AR-2131 · p.11 (RLs → storey heights)</span><span class="chip ext">BCA report (Type)</span><span class="chip ext">Fire services dwgs (Spec 17 sprinklers)</span><span class="chip ext">FER (performance solutions)</span></div>
-          <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">NCC 2022 Table C3D3</span><span class="chip code">C3D2(1)</span><span class="chip code">C3D4</span><span class="chip code">C3D6 (NSW-varied)</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">Scope is Class 5–9 only — Class 2/3 portions are N/A by C3D3(1); each exemption clause reroutes the verdict rather than relaxing it silently. A DTS breach covered by an FER is REVIEW, never FAIL — the tool can&rsquo;t evaluate an FER.</p></div>
+          <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">NCC 2022 Table C3D3</span><span class="chip code">C3D2(1)</span><span class="chip code">C3D4</span><span class="chip code">C3D6 (NSW-varied)</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">Scope is Class 5–9 only — Class 2/3 portions are N/A by C3D3(1); each exemption clause reroutes the verdict rather than relaxing it silently. The column input — Type of construction — is set by NCC 2022 C2D2 / Table C2D2: the very Part the check's citation accidentally points at. A DTS breach covered by an FER is REVIEW, never FAIL — the tool can&rsquo;t evaluate an FER.</p></div>
           <span class="bk">Verdict</span><div><p style="margin:0 0 6px; font-size:13px;"><span class="chip na">N/A</span> + <span class="chip review">REVIEW</span> — Class 2 portions: no table entry, N/A recorded with reason. Class 7A carpark: C3D2 sprinkler exemption likely (FER notes reference sprinklers throughout) but the evidence lives outside this set → REVIEW &ldquo;confirm Spec 17 coverage&rdquo;. FER-covered departures stay REVIEW.</p><div class="evidence" style="margin:0;"><span class="chip ref">C3D3(1) scope</span><span class="chip ref">C3D2 exemption</span><span class="chip ref">FER notes ×4</span></div></div>
         </div>
         <details class="prompt-d"><summary>Validation prompt — copy into the tool</summary><div class="prompt"><span class="pl">Validation prompt — 002.3</span><button type="button" data-copy>Copy</button><pre>For each compartment on AR-2101–2106: resolve its class set from hatches/labels.
@@ -685,6 +685,14 @@ Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
   
 
     <h3>The rule table 002.3 enforces</h3>
+    <div class="legend">
+      <div class="lg-title">Primary sources — verified against the adopted text (fetched 13.07.26)</div>
+      <div class="lg-grid" style="grid-template-columns:1fr;">
+        <div class="lg-row"><strong style="flex:none; width:150px;">Cited table</strong> <span>NCC 2019 A1 Vol One, Part C2 &ldquo;Compartmentation and separation&rdquo;, clause C2.2 + Table C2.2 — <a href="https://ncc.abcb.gov.au/editions/2019-a1/ncc-2019-volume-one-amendment-1/section-c-fire-resistance/part-c2-compartmentation" style="color:var(--accent);">ncc.abcb.gov.au/editions/2019-a1 → Part C2</a>. All limits below transcribed from this page and verified identical.</span></div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Governing edition</strong> <span>NCC 2022 renumbered compartmentation to Part C3 (Table C3D3, same limits). NCC 2022 &ldquo;Part C2&rdquo; is <em>Fire resistance and stability</em> — <a href="https://ncc.abcb.gov.au/editions/ncc-2022/adopted/volume-one/c-fire-resistance/part-c2-fire-resistance-and-stability" style="color:var(--accent);">ncc.abcb.gov.au/editions/ncc-2022 → Part C2</a> — which is NOT the size table, but IS where the tool reads <strong>Type of construction</strong> (C2D2, Table C2D2): the column selector of the size table.</span></div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Clause map</strong> <span style="font-family:var(--mono); font-size:11.5px;">C2.2→C3D3 (limits) · C2.3→C3D4 (large isolated) · C2.5→C3D6 (9a/9c) · C2.7→C3D8 (fire walls) · C2.8→C3D9 (classes, same storey) · 2022 C2D2 = Type of construction (input, not a limit)</span></div>
+      </div>
+    </div>
     <p class="lede">NCC 2022 Table C3D3 (the check's cited "Table C2.2", 2019 numbering — same limits). Every cell is <strong>two</strong> limits; a compartment must satisfy both.</p>
 
     <div class="twrap">
@@ -791,7 +799,7 @@ Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
 
   <footer>
     <span>FIRE-002 · Handover &amp; validation sheet · Valerie Jimenez · nyc@vjimenez.io</span>
-    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R6 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
+    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R7 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
   </footer>
 </div>
 
