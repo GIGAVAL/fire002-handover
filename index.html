@@ -819,6 +819,20 @@ Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
   var areas=document.querySelectorAll('textarea[data-key]');
   var countEl=document.getElementById('comment-count');
 
+  // persistence self-test: some embedded viewers sandbox localStorage away
+  var canPersist=true;
+  try{ localStorage.setItem(NS+'.test','1'); localStorage.removeItem(NS+'.test'); }catch(e){ canPersist=false; }
+  if(!canPersist){
+    var warn=document.createElement('span');
+    warn.textContent='⚠ THIS VIEWER CANNOT SAVE — EXPORT OR COPY BEFORE CLOSING';
+    warn.style.cssText='color:var(--fail);font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;';
+    countEl.parentNode.insertBefore(warn, countEl);
+  }
+  window.addEventListener('beforeunload', function(ev){
+    var n=Object.keys(store).filter(function(k){return (store[k]||'').trim();}).length;
+    if(!canPersist && n>0){ ev.preventDefault(); ev.returnValue='Comments are not saved in this viewer — export first.'; }
+  });
+
   function persist(){ try{ localStorage.setItem(NS, JSON.stringify(store)); }catch(e){} updateCount(); }
   function updateCount(){
     var n=Object.keys(store).filter(function(k){return (store[k]||'').trim();}).length;
@@ -833,7 +847,7 @@ Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
       t=setTimeout(function(){
         persist();
         var s=ta.closest('.cbox').querySelector('.saved');
-        if(s){ s.classList.add('on'); setTimeout(function(){s.classList.remove('on');},1400); }
+        if(s){ if(!canPersist){ s.textContent='in memory only — export!'; } s.classList.add('on'); setTimeout(function(){s.classList.remove('on');},1400); }
       },400);
     });
   });
