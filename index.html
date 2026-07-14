@@ -236,8 +236,19 @@
     <p class="lede">The framework is check-agnostic; FIRE-002 is one instantiation of it. Everything below the mantra is the same five-step pipeline and six rules, filled in with this client's parameters.</p>
 
     <div class="mantra">
-      <div class="m1">CODE IS UNIVERSAL — <em>THE CLIENT IS A PARAMETER</em></div>
+      <div class="m1">CODE IS UNIVERSAL — <em>THE CLIENT IS A BUILT PARAMETER</em></div>
       <div class="m2">Table C3D3's limits don't care who drew the set. What varies per client is everything else: the sheet numbering (AR-21xx here, not "A2100"), the legend palette, the compartment ID scheme, the jurisdiction, the stage, the Type of construction. Hard-code the code; parameterise the client.</div>
+    </div>
+
+    <div class="legend">
+      <div class="lg-title">Step −1 — Ask the client first (asking = scoring points; you're scoping, not stalling)</div>
+      <div class="lg-grid" style="grid-template-columns:1fr;">
+        <div class="lg-row"><strong style="flex:none; width:150px;">Three questions</strong> 1) Which jurisdiction and code edition — any local amendments? · 2) What stage is the set — are we enforcing or advising? · 3) What does their set include?</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Enforce</strong> Red pen — the set is about to issue, so a finding is a FAIL that blocks it: fix before it ships</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Advise</strong> Pencil note — the set is mid-design (SD/DD), so the same finding is a heads-up on the punch list, expected and fine</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Example</strong> Don't fail a DD set for missing hardware ratings — but the night before a CD issue, that same blank cell stops the presses. It's a setting on the check, decided by where the project is</div>
+        <div class="lg-row"><strong style="flex:none; width:150px;">Desk inputs</strong> Keyword <span style="font-family:var(--mono); font-weight:700;">FIRE</span> — the register title match that finds the series · the <strong>title block</strong> is the set's identity, read it immediately (it is what Step 0 parses)</div>
+      </div>
     </div>
     <div class="pipe">
       <div class="pipe-step"><span class="pn">1 · WHICH?</span>
@@ -262,7 +273,7 @@
     <ol class="rules">
       <li><span class="rn">1</span><span class="rt">Every step ends PASS / FAIL / CANNOT-VERIFY. Missing info never silently passes. Never guess.</span>
         <span class="rx"><span class="tag">HERE →</span> CANNOT-VERIFY is rendered REVIEW in the output contract. The carpark's C3D2 exemption is <em>probably</em> valid — sprinklers are referenced all over the FER notes — but the evidence sheet isn't in the architectural set, so 002.3 says REVIEW, not PASS.</span></li>
-      <li><span class="rn">2</span><span class="rt">Plan vs. schedule vs. detail disagree → that's a FINDING (coordination error), not a coin flip. Say which source governs.</span>
+      <li><span class="rn">2</span><span class="rt">Plan vs. schedule vs. detail disagree → that's a FINDING (coordination error), not a coin flip. Say which source governs — document hierarchy is a principle: specifications govern over drawings.</span>
         <span class="rx"><span class="tag">HERE →</span> Section AR-2131 labels the basement compartment B1; plan AR-2101 carries no ID at all — reported as a plan/section mismatch, with the plan governing IDs and the section governing heights. Same rule handles register-vs-title-block disagreements (title block wins) and duplicate revisions (latest wins, duplicate reported).</span></li>
       <li><span class="rn">3</span><span class="rt">Numbers get units and tolerances.</span>
         <span class="rx"><span class="tag">HERE →</span> Areas in m², volumes in m³, heights in mm (3375 / 3200 / 3750 from RL subtraction). Measured-vs-annotated disagreement band: 2% → REVIEW. Annotated within 5% of a limit: PASS + near-limit warning. Raster scans double both bands.</span></li>
@@ -273,6 +284,22 @@
       <li><span class="rn">6</span><span class="rt">Name what the recommended fix breaks.</span>
         <span class="rx"><span class="tag">HERE →</span> The fix for the 002.4 FAIL is "annotate every compartment area" — which immediately arms 002.3: declared numbers can expose an over-limit compartment that silence was hiding. If subdividing follows, new fire walls put doors on egress paths (travel-distance and width checks re-open) and every new penetration needs an AR-2151/52 detail. The fix is still right; the report says what it re-opens.</span></li>
     </ol>
+    <h3>Proof the framework transfers — the same five steps on a different rule</h3>
+    <p class="lede">The responses change per task; the steps never do. Here is the pipeline re-instantiated on an unrelated check — swinging doors in a means of egress:</p>
+    <div class="pipe" style="border-top:1.5px solid var(--ink);">
+      <div class="pipe-step"><span class="pn">1 · WHICH?</span>
+        <div class="px"><b>EGRESS DOORS</b>Swinging doors on egress paths. OUT on purpose: sliders/revolving (their own code sections — note them, don't judge them), closets, doors not on an egress path. A check that fires on out-of-scope elements buries real findings in noise</div></div>
+      <div class="pipe-step"><span class="pn">2 · WHERE?</span>
+        <div class="px"><b>EGRESS DOORS</b>Every fact has a home sheet; name it. A fact with no home anywhere in the set is itself a set-level finding</div></div>
+      <div class="pipe-step"><span class="pn">3 · TEST?</span>
+        <div class="px"><b>EGRESS DOORS</b>One sentence with a number in it — and remember cumulative: widths and travel distances sum along the path</div></div>
+      <div class="pipe-step"><span class="pn">4 · MISSING?</span>
+        <div class="px"><b>EGRESS DOORS</b>Never guess — flag it. A tool that guesses is worse than no tool</div></div>
+      <div class="pipe-step"><span class="pn">5 · REPORT</span>
+        <div class="px"><b>EGRESS DOORS</b>Evidence or it didn't happen. The PASS with citations IS the product</div></div>
+    </div>
+    <p style="font-size:12.5px; color:var(--ink-2); margin:10px 0 0; max-width:78ch;"><strong>If you're truly stuck:</strong> scope which elements the rule governs first. Then walk the five steps.</p>
+
     <div class="cbox"><label for="c-method">Your judgment — method<span class="saved">saved ✓</span></label><textarea id="c-method" data-key="method" placeholder="Tune the wording of the mantra or rules for Ron's review; note which rule this client's set stress-tests hardest…"></textarea></div>
   </section>
 
@@ -303,7 +330,7 @@
       <div class="qbody">
         <div class="verdict-line"><span class="chip review">NUANCE FOUND</span><span style="font-size:13px; color:var(--ink-2);">Filed as "CD Set" — but the title blocks say otherwise</span></div>
         <p><strong>The set is past CD.</strong> The file is named "CD Set", but every title block reads <strong>FOR CONSTRUCTION</strong> under a <strong>CONSTRUCTION CERTIFICATE</strong> staging regime — the register legend maps revisions to CC packages (CC1 excavation &amp; shoring → CC4 remainder of works), and revisions A through O (Jan 2024–Aug 2025) are all "For Construction" issues. This is an issued IFC/CC set, not a design-development snapshot.</p>
-        <p><strong>Enforcing vs advising follows from that.</strong> FIRE-002 is scoped to DD and CD — its natural home is a <em>gate</em>: severity Critical means a FAIL blocks the set from issuing. Run against an already-issued FC set, the same check becomes an <em>audit</em>: findings are advisory, routed to the architect and certifier for the next revision, because the tool has no issue to block. The tool's verdicts don't change — only who acts on them and how fast. The output should therefore carry a <span class="mono" style="font-family:var(--mono); font-size:12px;">mode: enforce | advise</span> flag derived from the title-block status, never hard-coded.</p>
+        <p><strong>Enforcing vs advising follows from that.</strong> FIRE-002 is scoped to DD and CD — its natural home is a <em>gate</em>: severity Critical means a FAIL blocks the set from issuing. Run against an already-issued FC set, the same check becomes an <em>audit</em>: findings are advisory, routed to the architect and certifier for the next revision, because the tool has no issue to block. The tool's verdicts don't change — only who acts on them and how fast. Rule of thumb: <strong>enforce = red pen</strong> (a finding blocks the issue), <strong>advise = pencil note</strong> (same finding, punch-list item). Don't fail a DD set for missing hardware ratings — the night before a CD issue, that same blank cell stops the presses. The output should therefore carry a <span class="mono" style="font-family:var(--mono); font-size:12px;">mode: enforce | advise</span> flag derived from the title-block status, never hard-coded.</p>
         <div class="evidence">
           <span class="chip ref">Title block: "FOR CONSTRUCTION"</span><span class="chip ref">Register legend: CC1–CC4</span><span class="chip ref">Rev O · 09.08.25 · "For Construction - CC4"</span>
         </div>
@@ -355,7 +382,7 @@
     <div class="qcard">
       <div class="qcard-head"><span class="qnum">002.1</span><h3>Plans exist for all levels</h3><span style="margin-left:auto; display:flex; gap:6px;"><span class="chip pass">PASS</span></span></div>
       <div class="qbody">
-        <p style="margin:0 0 10px;"><em>&ldquo;Confirm fire compartmentation plans exist for all levels.&rdquo;</em> — every level on the GA plan list has a 2100-series fire plan. The level list comes from the GA series, <em>never</em> from the fire series itself — a forgotten level would vanish from the denominator too.</p>
+        <p style="margin:0 0 10px;"><em>&ldquo;Confirm fire compartmentation plans exist for all levels.&rdquo;</em><span style="font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--accent); font-weight:700;"> DEFINE: ALL LEVELS.</span> — every level on the GA plan list has a 2100-series fire plan. The level list comes from the GA series, <em>never</em> from the fire series itself — a forgotten level would vanish from the denominator too.</p>
         <div class="basis" style="margin:0 0 4px;">
           <span class="bk">Drawings</span><div class="evidence" style="margin:0;"><span class="chip ref">AR-0001 register · pp.1–4 (use Rev Z)</span><span class="chip ref">AR-1101–1108 GA plans (denominator)</span><span class="chip ref">AR-2101–2106 · pp.5–10</span><span class="chip ref">AR-2131 · p.11 (RL cross-check)</span></div>
           <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">DBP Act 2020 (NSW) ss 6–9 + Reg 2021</span><span class="chip code">NCC 2022 C3D3(2)</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">Fire compartmentation of a building with a Class 2 part is a <em>regulated design</em>: a registered practitioner must prepare and declare it before building work — so the plans must exist as declared documents, per level, at current revision. C3D3(2) exempts roof-only plant levels.</p></div>
@@ -374,7 +401,7 @@ C3D3(2); ambiguous (roof with enclosed rooms) = REVIEW.</pre></div></details>
     <div class="qcard">
       <div class="qcard-head"><span class="qnum">002.2</span><h3>Boundaries shown and labelled</h3><span style="margin-left:auto; display:flex; gap:6px;"><span class="chip pass">PASS</span><span class="chip review">1 REVIEW</span></span></div>
       <div class="qbody">
-        <p style="margin:0 0 10px;"><em>&ldquo;Compartment boundaries shown and labelled.&rdquo;</em> — four proxies, all required per sheet: legend exists · boundary linework closes · every region carries a class label / compartment ID · boundaries carry FRLs. Palette read from each sheet&rsquo;s own legend swatches, never hard-coded.</p>
+        <p style="margin:0 0 10px;"><em>&ldquo;Compartment boundaries shown and labelled.&rdquo;</em><span style="font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--accent); font-weight:700;"> DEFINE: COMPARTMENTS · BOUNDARIES · LEGENDS · NOTES · TAGS · KEYNOTES.</span> — four proxies, all required per sheet: legend exists · boundary linework closes · every region carries a class label / compartment ID · boundaries carry FRLs. Palette read from each sheet&rsquo;s own legend swatches, never hard-coded.</p>
         <div class="basis" style="margin:0 0 4px;">
           <span class="bk">Drawings</span><div class="evidence" style="margin:0;"><span class="chip ref">AR-2101–2106 · pp.5–10 (legend + linework + IDs)</span><span class="chip ref">AR-2131 · p.11 (ID cross-check)</span><span class="chip ref">AR-2151/52 · pp.12–13 (details)</span><span class="chip ref">AR-4102 (FB detail)</span></div>
           <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">NCC 2022 C3D8 + Spec 5</span><span class="chip code">AS 1530.4</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">A boundary is only a boundary if it&rsquo;s a rated construction — every drawn boundary must carry an FRL, and every FRL traces to an AS 1530.4 furnace test. The tool checks notation exists and is well-formed (values in {30, 60, 90, 120, 180, 240}); it never re-derives ratings.</p></div>
@@ -397,7 +424,7 @@ No legend or no labels at all = FAIL; partial/unclosed/low-confidence = REVIEW.<
     <div class="qcard">
       <div class="qcard-head"><span class="qnum">002.3</span><h3>Sizes comply with NCC Table C2.2 (= C3D3)</h3><span style="margin-left:auto; display:flex; gap:6px;"><span class="chip na">N/A</span><span class="chip review">REVIEW</span></span></div>
       <div class="qbody">
-        <p style="margin:0 0 10px;"><em>&ldquo;Maximum compartment sizes comply with NCC Table C2.2.&rdquo;</em> — each compartment&rsquo;s area <strong>and</strong> volume against Table C3D3 (2022 numbering of the cited C2.2 — Part E below), honouring its exemptions. Row = class, column = Type of construction, and both limits must hold.</p>
+        <p style="margin:0 0 10px;"><em>&ldquo;Maximum compartment sizes comply with NCC Table C2.2.&rdquo;</em><span style="font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--accent); font-weight:700;"> DEFINE: MAXIMUM · SIZES · COMPLIANCE AUTHORITY · NCC C2.2.</span> — each compartment&rsquo;s area <strong>and</strong> volume against Table C3D3 (2022 numbering of the cited C2.2 — Part E below), honouring its exemptions. Row = class, column = Type of construction, and both limits must hold.</p>
         <div class="basis" style="margin:0 0 4px;">
           <span class="bk">Drawings</span><div class="evidence" style="margin:0;"><span class="chip ref">AR-2101–2106 · pp.5–10 (geometry @ 1:100)</span><span class="chip ref">AR-2131 · p.11 (RLs → storey heights)</span><span class="chip ext">BCA report (Type)</span><span class="chip ext">Fire services dwgs (Spec 17 sprinklers)</span><span class="chip ext">FER (performance solutions)</span></div>
           <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">NCC 2022 Table C3D3</span><span class="chip code">C3D2(1)</span><span class="chip code">C3D4</span><span class="chip code">C3D6 (NSW-varied)</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">Scope is Class 5–9 only — Class 2/3 portions are N/A by C3D3(1); each exemption clause reroutes the verdict rather than relaxing it silently. A DTS breach covered by an FER is REVIEW, never FAIL — the tool can&rsquo;t evaluate an FER.</p></div>
@@ -421,7 +448,7 @@ citing the clause, the limit, and both measured and annotated values.</pre></div
     <div class="qcard">
       <div class="qcard-head"><span class="qnum">002.4</span><h3>Areas annotated</h3><span style="margin-left:auto; display:flex; gap:6px;"><span class="chip fail">FAIL</span></span></div>
       <div class="qbody">
-        <p style="margin:0 0 10px;"><em>&ldquo;Compartment areas annotated.&rdquo;</em> — every compartment carries exactly one declared m² value, on-sheet or in a schedule, associated to its region by centroid, leader, or schedule row.</p>
+        <p style="margin:0 0 10px;"><em>&ldquo;Compartment areas annotated.&rdquo;</em><span style="font-family:var(--mono); font-size:10.5px; letter-spacing:.06em; color:var(--accent); font-weight:700;"> DEFINE: ANNOTATION · WHERE THE AREA VALUE LIVES.</span> — every compartment carries exactly one declared m² value, on-sheet or in a schedule, associated to its region by centroid, leader, or schedule row.</p>
         <div class="basis" style="margin:0 0 4px;">
           <span class="bk">Drawings</span><div class="evidence" style="margin:0;"><span class="chip ref">AR-2101–2106 · pp.5–10 (in-plan text)</span><span class="chip ref">Any compartment schedule (none exists)</span></div>
           <span class="bk">Code basis</span><div><div class="evidence" style="margin:0 0 6px;"><span class="chip code">DBP Act 2020 s.9 declaration</span><span class="chip code">NCC 2022 C3D3 (auditability)</span></div><p style="margin:0; font-size:12.5px; color:var(--ink-2);">No NCC clause literally says &ldquo;write the m² on the sheet&rdquo; — the requirement is evidentiary: the declared design must let the certifier verify the C3D3 limits without re-deriving them. An undeclared area makes the regulated design unauditable.</p></div>
@@ -807,7 +834,7 @@ Unjoinable geometry, unresolvable tag, or corefill-conditional FRL
 
   <footer>
     <span>FIRE-002 · Handover &amp; validation sheet · Valerie Jimenez · nyc@vjimenez.io</span>
-    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R3 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
+    <span class="mono" style="font-family:var(--mono);">DOC ISSUE R4 · 13.07.26 · SOURCE: AR-0001 REV T–Z · AR-2101–2152 · 6580 WOLSELEY ST</span>
   </footer>
 </div>
 
