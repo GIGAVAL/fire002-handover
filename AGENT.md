@@ -11,7 +11,8 @@ CODE IS UNIVERSAL — THE CLIENT IS A BUILT PARAMETER.
 Hard-code the code. Read everything client-specific (sheet numbers, legend palette,
 ID scheme, jurisdiction, stage, Type) from the set itself, every run.
 
-## STEP −1 · SCOPE (once per set)
+## STEP −1 · SCOPE (once per set — you answer these from the title block itself;
+## asking the client is the human fallback)
 Keywords: FIRE · COMPARTMENTATION (find the series) · FRL (find rated elements).
 The title block is the set's identity — read it first on every sheet you touch.
 1. Jurisdiction & edition: project address + consent numbers from the title block.
@@ -30,8 +31,10 @@ The title block is the set's identity — read it first on every sheet you touch
 - COLOUR→FRL MAP from each sheet's own legend swatches — never hard-coded, palettes
   differ per firm and plot. A colour is a CLAIMED rating, not proof.
 - STOREY HEIGHTS from the overall section: subtract consecutive datum RLs.
-- TYPE SCHEDULES: walls (wall-type sheets), floors, ceilings, doors (door master
-  schedule — FR tags resolve here). This is the proof layer.
+- TYPE SCHEDULES: walls (wall-type sheets), floors, ceilings — the proof layer.
+  These are CONTEXT INPUTS: they support the check, they are not the deliverable.
+  Door FR tags resolve in the door master schedule but belong to a DIFFERENT check:
+  note the tag, never judge it here (rule: gate scope first).
 - EXTERNAL EVIDENCE register: Type of construction (BCA report), sprinklers
   (fire services), FER contents. Each absent item degrades its dependent
   check to REVIEW — ask loudly, never guess.
@@ -43,8 +46,10 @@ The title block is the set's identity — read it first on every sheet you touch
        tokens `(\d{2,3}|[-–])/(\d{2,3}|[-–])/(\d{2,3}|[-–])`, values in
        {30,60,90,120,180,240}; boundary linework closes; every region carries a class
        label and/or compartment ID; every boundary maps to an FRL. Cross-check plan IDs
-       against the section — mismatch is a coordination FINDING: plans govern IDs,
-       the section governs heights, title block beats register, latest revision wins.
+       against the section, and check the ID scheme is consistent across plans (one
+       sheet with class labels only = FINDING: ID-scheme inconsistency). Precedence
+       per fact type: specifications over drawings, title block over register, latest
+       revision over duplicates, plans govern IDs, the section governs heights.
 002.3 SIZE — for each compartment: classes ⊆ {2,3,4} → N/A (no table entry — explicit
        branch, never PASS-by-silence). Sprinklered/open-deck carpark → exemption, but
        the evidence is external → REVIEW until confirmed. Otherwise:
@@ -58,8 +63,8 @@ The title block is the set's identity — read it first on every sheet you touch
        Zero → FAIL naming the sheet; conflicting values → REVIEW.
 
 CROSS-CHECK (002.5, extension) — every boundary segment's claimed FRL (colour) must
-resolve through the same level's partition plan tag to a type-schedule row whose tested
-FRL meets or exceeds the claim, field by field. Unjoinable geometry, unresolved tag, or
+resolve through the same level's partition plan tag to a wall/floor/ceiling type-schedule
+row whose tested FRL meets or exceeds the claim, field by field (doors: separate check). Unjoinable geometry, unresolved tag, or
 conditional ratings ("corefilled if required" with no corefill note) → REVIEW.
 
 ## NUMBERS
